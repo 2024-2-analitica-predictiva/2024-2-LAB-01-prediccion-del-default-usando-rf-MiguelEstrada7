@@ -1,7 +1,6 @@
 # flake8: noqa: E501
 """Autograding script."""
 
-import gzip
 import json
 import os
 import pickle
@@ -9,7 +8,7 @@ import pickle
 import pandas as pd  # type: ignore
 
 # ------------------------------------------------------------------------------
-MODEL_FILENAME = "files/models/model.pkl.gz"
+MODEL_FILENAME = "files/models/model.pkl"
 MODEL_COMPONENTS = [
     "OneHotEncoder",
     "RandomForestClassifier",
@@ -57,7 +56,7 @@ METRICS = [
 def _load_model():
     """Generic test to load a model"""
     assert os.path.exists(MODEL_FILENAME)
-    with gzip.open(MODEL_FILENAME, "rb") as file:
+    with open(MODEL_FILENAME, "rb") as file:
         model = pickle.load(file)
     assert model is not None
     return model
